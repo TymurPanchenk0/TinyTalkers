@@ -1,0 +1,109 @@
+<!-- lessonPage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Page</title>
+    <style>
+        body {
+            background-color: #b4fdf1;
+            text-align: center;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        #lesson-title {
+            font-size: 48px;
+            font-family: "DejaVu Sans", serif;
+            margin-bottom: 20px;
+        }
+
+        #lesson-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 36px;
+            font-family: P052, fantasy;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        #home-button {
+            font-size: 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <h2 id="lesson-title">Lesson Title Goes Here</h2>
+    <img id="lesson-image" src="" alt="Lesson Image">
+    <div class="button-container">
+        <button onclick="showMiniGame1()">Мінігра 1</button>
+        <button onclick="showMiniGame2()">Мінігра 2</button>
+        <button onclick="showTest()">Тест</button>
+    </div>
+    <button id="home-button" onclick="goHome()">Повернутися на головну</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+
+        const lessonTitle = urlParams.get('title');
+        const lessonImage = urlParams.get('image');
+
+        document.getElementById('lesson-title').innerText = lessonTitle;
+        document.getElementById('lesson-image').src = decodeURIComponent(lessonImage);
+    });
+
+    function goHome() {
+        window.location.href = 'MainPage.html';
+    }
+
+    function showMiniGame1() {
+        window.location.href = 'miniGame1.html';
+    }
+
+    function showMiniGame2() {
+        window.location.href = 'miniGame2.html';
+    }
+
+    function showTest() {
+        window.location.href = 'test.html';
+    }
+</script>
+</body>
+</html>
+

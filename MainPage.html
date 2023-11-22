@@ -1,0 +1,140 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyTalk Adventures</title>
+    <style>
+        body {
+            background-color: #b4fdf1;
+            text-align: center;
+            font-family: Times, serif;
+        }
+
+        #header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #lesson-title {
+            font-size: 60px;
+        }
+
+        #lesson-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 10px;
+        }
+
+        button {
+            font-size: 50px;
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 15px 25px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #content {
+            display: none;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <label id="lesson-title">TinyTalk Adventures</label>
+    <img id="lesson-image" src="Logo.jpg" alt="Logo">
+</div>
+<div class="button-grid" id="button-grid"></div>
+<div id="content"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const picturePath = "LessonsMiniPicture/"
+        const lessons = [
+            {text: "A a", image: picturePath + "A.jpg"},
+            {text: "B b", image: picturePath + "B.jpg"},
+            {text: "C c", image: picturePath + "C.jpg"},
+            {text: "D d", image: picturePath + "D.jpg"},
+            {text: "E e", image: picturePath + "E.jpg"},
+            {text: "F f", image: picturePath + "F.jpg"},
+            {text: "G g", image: picturePath + "G.jpg"},
+            {text: "H h", image: picturePath + "H.jpg"},
+            {text: "I i", image: picturePath + "I.jpg"},
+            {text: "J j", image: picturePath + "J.jpg"},
+            {text: "K k", image: picturePath + "K.jpg"},
+            {text: "L l", image: picturePath + "L.jpg"},
+            {text: "M m", image: picturePath + "M.jpg"},
+            {text: "N n", image: picturePath + "N.jpg"},
+            {text: "O o", image: picturePath + "O.jpg"},
+            {text: "P p", image: picturePath + "P.jpg"},
+            {text: "Q q", image: picturePath + "Q.jpg"},
+            {text: "R r", image: picturePath + "R.jpg"},
+            {text: "S s", image: picturePath + "S.jpg"},
+            {text: "T t", image: picturePath + "T.jpg"},
+            {text: "U u", image: picturePath + "U.jpg"},
+            {text: "V v", image: picturePath + "V.jpg"},
+            {text: "W w", image: picturePath + "W.jpg"},
+            {text: "X x", image: picturePath + "X.jpg"},
+            {text: "Y y", image: picturePath + "Y.jpg"},
+            {text: "Z z", image: picturePath + "Z.jpg"},
+        ];
+
+        const buttonGrid = document.getElementById('button-grid');
+
+        lessons.forEach((lesson, index) => {
+            const button = document.createElement('button');
+            button.innerHTML = `<img src="${lesson.image}" alt="${lesson.text}"><span>${lesson.text}</span>`;
+            button.addEventListener('click', () => showLessonPage(lesson));
+            buttonGrid.appendChild(button);
+        });
+
+        function setCookie(cookieName, cookieValue, expirationDays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+        }
+
+        function showLessonPage(lesson) {
+            setCookie('lessonTitle', lesson.text, 1);
+            setCookie('lessonImage', lesson.image, 1);
+            const originalPath = encodeURIComponent(lesson.image)
+            const decodedPath = decodeURIComponent(originalPath);
+            const fileName = decodedPath.split('/').pop();
+            const newPath = `LessonsPicture/Big_${fileName}`;
+            const queryString = `?title=${encodeURIComponent(lesson.text)} &image=${newPath}`;
+            window.location.href = `lessonPage.html${queryString}`;
+        }
+    });
+</script>
+</body>
+</html>
